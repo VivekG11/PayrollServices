@@ -23,3 +23,11 @@ select * from Employe_Payroll;
 select  salary, name  from Employe_Payroll where name='Kumar';
 
 select salary , name from Employe_Payroll where startDate between cast('2000-01-01' as date) and  getdate(); 
+
+alter table Employe_Payroll add gender char(1);
+
+update Employe_Payroll set gender = 'M';
+
+update Employe_Payroll set gender = 'F' where name = 'Pavani';
+
+select * from Employe_Payroll;
