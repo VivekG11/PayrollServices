@@ -41,3 +41,13 @@ select min(salary) as Totalsalary, gender from Employe_Payroll group by gender;
 select max(salary) as Totalsalary, gender from Employe_Payroll group by gender;
 
 select count(salary) as Totalsalary from employee_payroll;
+
+alter table Employe_Payroll add Phone bigint;
+
+alter table Employe_Payroll add Address varchar(300);
+
+alter table Employe_Payroll add Department varchar(100) not null default 'SALES';
+
+select * from Employe_Payroll;
+--------UC8---------
+
