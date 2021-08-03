@@ -51,3 +51,19 @@ alter table Employe_Payroll add Department varchar(100) not null default 'SALES'
 select * from Employe_Payroll;
 --------UC8---------
 
+alter table Employe_Payroll add BasicPay bigint;
+
+alter table Employe_Payroll add Deductions int;
+
+alter table Employe_Payroll add TaxablePay int;
+
+alter table Employe_Payroll add IncomeTax int;
+
+alter table Employe_Payroll add NetPay bigint;
+
+select * from Employe_Payroll;
+--------UC9---------------
+
+
+
+
