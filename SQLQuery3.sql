@@ -65,5 +65,6 @@ select * from Employe_Payroll;
 --------UC9---------------
 
 
+insert into Employe_Payroll values('Guna',54874,'2000-09-29','M',7991456,'Manthani','Marketing',20000,2000,200,900,16900);
 
 
