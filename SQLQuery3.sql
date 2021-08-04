@@ -172,3 +172,42 @@ insert into EmployeDepartment values(1,3),(2,5),(3,6),(4,7);
 
 select * from EmployeDepartment;
 
+select CmpId,CompanyName,EmpId,EmployeName,Address,Phone,StartDate,gender,BasicPay,Deductions,TaxablePay,IncomeTax,NetPay,DeptName
+FROM Company
+INNER JOIN Employee on Company.CmpId = Employee.CompanyId
+INNER JOIN Payroll on Payroll.EmpId = Employee.EmployeId
+INNER JOIN EmployeDepartment on Employee.EmployeId = EmployeDepartment.EmployeId
+INNER JOIN Department on Department.DeptId = EmployeDepartment.DeptId;
+
+EXEC sp_RENAME 'Company.CompanyId' , 'CmpId', 'COLUMN';
+
+alter table Company RENAME CompanyId to CmpId;  
+
+
+------Retrieving Data based on certain period-----------
+SELECT CmpId CompanyName,EmployeId,EmployeName
+From Company
+INNER JOIN Employee on Company.CmpId = Employee.CompanyId where StartDate BETWEEN Cast('2017-03-01' as Date) and cast('2019-11-11' as Date);
+
+-------retrieving Employe Count------------
+select Count(EmpId) as "EmployeeCount" , gender 
+from Employee
+INNER JOIN Payroll on Employee.EmployeId = Payroll.EmpId group by gender;
+
+------Finding MInimum Salary------------
+
+select EmpId,EmployeName,BasicPay
+From Employee
+INNER JOIN Payroll on Employee.EmployeId = Payroll.EmpId
+where BasicPay =(select min(BasicPay) From Payroll);
+
+ -------------- Finding Maximum Salary------------
+
+select EmpId,EmployeName,BasicPay
+From Employee
+INNER JOIN Payroll on Employee.EmployeId = Payroll.EmpId
+where BasicPay =(select max(BasicPay) From Payroll);
+
+------Finding Average Pay------------
+select AVG(BasicPay) as "AveragePay", gender From Employee
+INNER JOIN Payroll on Employee.EmployeId = Payroll.EmpId group by gender;
