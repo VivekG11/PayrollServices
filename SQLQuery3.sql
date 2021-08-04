@@ -68,3 +68,107 @@ select * from Employe_Payroll;
 insert into Employe_Payroll values('Guna',54874,'2000-09-29','M',7991456,'Manthani','Marketing',20000,2000,200,900,16900);
 
 insert into Employe_Payroll values('Vivek',55784,'2020-09-29','M',733886,'Pdpl','Marketing',30000,2000,200,1000,26800);
+
+update Employe_Payroll set Phone = 73388,Address = 'Manthani',BasicPay=20000,Deductions = 1500,IncomeTax=500  where name = 'Kumar';
+
+update Employe_Payroll set Phone = 96296,Address = 'Vizag',BasicPay=22000,Deductions = 1600,IncomeTax=600  where name = 'Aditya';
+
+update Employe_Payroll set Phone = 96762,Address = 'KADAPA',BasicPay=24000,Deductions = 1700,IncomeTax=700  where name = 'Pavani';
+
+update Employe_Payroll set Phone = 70950,Address = 'Karimnagar',BasicPay=26000,Deductions = 1700,IncomeTax=700  where id = 1;
+
+update Employe_Payroll set TaxablePay = BasicPay - Deductions;
+
+update Employe_Payroll set NetPay = TaxablePay - IncomeTax;
+
+select * from Employe_Payroll;
+
+update Employe_Payroll set startDate = '2020-03-29' where id = 1;
+
+update Employe_Payroll set startDate = '2019-12-20' where id = 2;
+
+update Employe_Payroll set startDate = '2020-01-02' where name = 'Aditya';
+
+update Employe_Payroll set startDate = '2018-06-11' where id = 3;
+
+update Employe_Payroll set startDate = '2017-11-28' where id = 5;
+
+update Employe_Payroll set startDate = '2018-06-25' where id = 6;
+
+-----Creating Company Table -------------
+
+create table Company(
+CompanyId int identity(1,1) primary key,
+CompanyName varchar(100));
+
+select * from Company;
+
+insert into Company values('TVS'),('NXT'),('CTS');
+
+------Creating Employee Table--------
+ create table Employee(
+ EmployeId int identity(1,1) primary key,
+ CompanyId int FOREIGN KEY REFERENCES Company(CompanyId),
+ EmployeName varchar(50),
+ Phone bigint,
+ Address varchar(150),
+ StartDate date,
+ gender char(1),
+ );
+
+ ----creating payroll table-------
+
+ create table Payroll(
+ EmployeId int FOREIGN KEY REFERENCES Employee(EmployeId),
+ BasicPay bigint,
+ Taxablepay int,
+ Incometax int,
+ Deductions int,
+ Netpay bigint);
+
+--------create Department Table--------
+
+create table Department(
+DeptId int identity(1,1) primary key,
+DeptName varchar(100));
+
+-------create EmployeeDepartment Table------
+
+create table EmployeDepartment(
+DeptId int FOREIGN KEY REFERENCES Department(DeptId),
+EmployeId int FOREIGN KEY REFERENCES Employee(EmployeId));
+
+-----Inserting Values into Employee table------
+insert into Employee values (2,'Arun',95757,'Hyderabad','2020-10-02','M');
+
+insert into Employee values
+(1,'Akhil',90298,'Peddapalle','2019-09-17','M'),
+(3,'Vinay',97009,'warangal','2017-04-17','M'),
+(2,'Meghana',88976,'Bhpl','2018-06-25','F');
+
+select * from Employee;
+
+-----Inserting values into payroll table-----
+
+select * from Payroll;
+
+insert into Payroll(EmployeId,BasicPay,Incometax,Deductions) values (3,22000,500,1000),(5,24000,700,1000),(6,26000,800,1500),(7,25000,600,1000);
+
+update Payroll set Taxablepay = BasicPay - Deductions;
+
+update Payroll set Netpay = Taxablepay - Incometax;
+
+select * from Payroll;
+
+sp_help ;
+
+insert into Department values ('HR'),('TESTING'),('DEVELOPER'),('TECHSUPPORT');
+
+select * from Department;
+
+------DepartmenTable-----
+
+insert into EmployeDepartment values(1,3),(2,5),(3,6),(4,7);
+
+select * from EmployeDepartment;
+
